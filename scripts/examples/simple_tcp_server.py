@@ -8,6 +8,13 @@ from umodbus import conf
 from umodbus.server.tcp import RequestHandler, get_server
 from umodbus.utils import log_to_stream
 
+
+class MyRequestHandler(RequestHandler):
+
+    def handle(self):
+        super().handle()
+        print('foo')
+
 # Add stream handler to logger 'uModbus'.
 log_to_stream(level=logging.DEBUG)
 
@@ -18,7 +25,7 @@ data_store = defaultdict(int)
 conf.SIGNED_VALUES = True
 
 TCPServer.allow_reuse_address = True
-app = get_server(TCPServer, ('localhost', 502), RequestHandler)
+app = get_server(TCPServer, ('localhost', 5020), MyRequestHandler)
 
 
 @app.route(slave_ids=[1], function_codes=[1, 2], addresses=list(range(0, 10)))

@@ -9,7 +9,7 @@ from umodbus.client import tcp
 conf.SIGNED_VALUES = True
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect(('localhost', 502))
+sock.connect(('localhost', 5020))
 
 # Returns a message or Application Data Unit (ADU) specific for doing
 # Modbus TCP/IP.
